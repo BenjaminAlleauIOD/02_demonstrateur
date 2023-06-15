@@ -93,11 +93,11 @@ df_feature_importance = df_feature_importance.sort_values('Importance', ascendin
 # Application Execution
 if __name__ == '__main__':
 
-    # Load logo image from file
-    logo_image = "image\Logo_Iod_solutions_Horizontal_Logo_Complet_Blanc_RVB_1186px@72ppi.png"
+    # # Load logo image from file
+    # logo_image = "image\Logo_Iod_solutions_Horizontal_Logo_Complet_Blanc_RVB_1186px@72ppi.png"
 
-    # Display logo in the sidebar
-    st.sidebar.image(logo_image, width=100)
+    # # Display logo in the sidebar
+    # st.sidebar.image(logo_image, width=100)
 
     st.sidebar.title("")
     tab_selected = st.sidebar.radio("Navigation", options=["Overview", "Suppliers","Graph"])
