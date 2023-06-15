@@ -107,7 +107,7 @@ if __name__ == '__main__':
     </style>
     """,
     unsafe_allow_html=True)
-    
+
     st.markdown(
     """
     <style>
@@ -116,8 +116,7 @@ if __name__ == '__main__':
     }
     </style>
     """,
-    unsafe_allow_html=True
-)
+    unsafe_allow_html=True)
 
     st.sidebar.markdown("IoD solutions")
 
