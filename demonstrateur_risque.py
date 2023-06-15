@@ -98,6 +98,28 @@ if __name__ == '__main__':
 
     # # Display logo in the sidebar
     # st.sidebar.image(logo_image, width=100)
+    st.sidebar.markdown(
+    """
+    <style>
+    .sidebar .sidebar-content {
+        font-family: 'Interstate Regular', Arial, sans-serif;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True)
+    
+    st.markdown(
+    """
+    <style>
+    body {
+        font-family: 'Roboto', Arial, sans-serif;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+    st.sidebar.markdown("IoD solutions")
 
     st.sidebar.title("")
     tab_selected = st.sidebar.radio("Navigation", options=["Overview", "Suppliers","Graph"])
