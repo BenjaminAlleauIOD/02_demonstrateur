@@ -126,9 +126,9 @@ if __name__ == '__main__':
 
         # Top 5 high-risk suppliers
         col1, col2 = st.columns(2)
-        col1.subheader("Top 5 High-Risk Suppliers")
+        col1.subheader("High-Risk Suppliers")
         #top_risk_suppliers = selected_data.nlargest(5, 'Risk Score')
-        col1.dataframe(selected_data[["Supplier", "Risk Score", "Risk Variation"]], hide_index=True,)
+        col1.dataframe(selected_data[["Supplier", "Risk Score", "Risk Variation"]].sort_values("Risk Variation",ascending=False), hide_index=True)
 
         # Création du graphique
         # Création de la figure Plotly
@@ -166,7 +166,7 @@ if __name__ == '__main__':
         #     st.plotly_chart(gauge, theme="streamlit", use_container_width=True)
 
         # Delay Count Trend
-        st.subheader("Delay Count Trend Global")
+        st.subheader("Delivery Trend Global")
         # Create interactive chart with Plotly
         fig = px.line(df_delivery, x='Month', y='Delivery Time', title="Delivery On-Time Trend (D1) and Non-Default Delivery Trend per Month (N1)")
         fig.update_xaxes(title="Month")
@@ -219,7 +219,7 @@ if __name__ == '__main__':
                 col3.warning(supplier_info['Risk Variation'],icon="🔻")
 
             # Delivery Time Trend over the last 12 months
-            st.subheader("Delivery Time Trend " + supplier_name)
+            st.subheader("Delivery Trend " + supplier_name)
             # Create interactive chart with Plotly
             fig = px.line(df_delivery, x='Month', y='Delivery Time', title="Delivery On-Time Trend (D1) and Non-Default Delivery Trend per Month (N1)")
             fig.update_xaxes(title="Month")
