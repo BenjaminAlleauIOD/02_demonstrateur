@@ -92,7 +92,7 @@ tshirts_sold_2023 = df_2023['TShirt_Sales'].sum()
 tshirts_predicted_2023 = df_2023['prediction'].sum()
 
 # Calculating stock level for 2023
-service_level_2023 = df_2023['Service_Level_TShirt'].mean()  # Suppose we want to display the average stock level for 2023
+service_level_2023 = 100*df_2023['Service_Level_TShirt'].mean()  # Suppose we want to display the average stock level for 2023
 
 
 # Percentage Error
@@ -130,7 +130,6 @@ elif analysis_tab == 'Analysis':
     fig = go.Figure(data=[go.Histogram(x=errors)])
     st.plotly_chart(fig)
 
-
     # 2. Seasonality using a Simple Moving Average
     st.subheader("Seasonality: Moving Average")
     df_reel['SMA'] = df_reel['TShirt_Sales'].rolling(window=3).mean()
@@ -147,4 +146,3 @@ elif analysis_tab == 'Analysis':
     ])
     fig.update_layout(barmode='stack')
     st.plotly_chart(fig)
-
