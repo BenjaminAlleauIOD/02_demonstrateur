@@ -14,7 +14,7 @@ import streamlit.components.v1 as components
 import networkx as nx
 from pyvis.network import Network
 import got 
-
+from function import * 
 
 ## Function
 def generate_fake_data():
