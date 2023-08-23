@@ -183,12 +183,3 @@ elif analysis_tab == 'Analysis':
     fig.add_trace(go.Scatter(x=df_reel['Date'], y=df_reel['TShirt_Sales'], name="Actual Sales"))
     fig.add_trace(go.Scatter(x=df_reel['Date'], y=df_reel['SMA'], name="Moving Average", line=dict(color='red')))
     st.plotly_chart(fig)
-
-    # 4. Stacked Bar Chart
-    st.subheader("Stacked Bar Chart: Actuals vs. Errors")
-    fig = go.Figure(data=[
-        go.Bar(name='Actual Sales', x=df_reel['Date'], y=df_reel['TShirt_Sales']),
-        go.Bar(name='Errors', x=df_reel['Date'], y=errors)
-    ])
-    fig.update_layout(barmode='stack')
-    st.plotly_chart(fig)
