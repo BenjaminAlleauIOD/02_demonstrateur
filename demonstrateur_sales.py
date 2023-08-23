@@ -102,8 +102,33 @@ else:
     percentage_error_2023 = 0
 
 
+# # Load logo image from file
+# logo_image = "image\Logo_Iod_solutions_Horizontal_Logo_Complet_Blanc_RVB_1186px@72ppi.png"
 
-analysis_tab = st.selectbox('Select a view', ['Overview', 'Analysis'])
+# # Display logo in the sidebar
+# st.sidebar.image(logo_image, width=100)
+st.sidebar.markdown(
+"""
+<style>
+.sidebar .sidebar-content {
+    font-family: 'Interstate Regular', Arial, sans-serif;
+}
+</style>
+""",
+unsafe_allow_html=True)
+
+st.markdown(
+"""
+<style>
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+}
+</style>
+""",
+unsafe_allow_html=True)
+
+st.sidebar.markdown("IoD solutions")
+analysis_tab = st.sidebar.selectbox('Select a view', ['Overview', 'Analysis'])
 
 if analysis_tab == 'Overview':
     # Displaying KPIs in Streamlit
@@ -124,6 +149,27 @@ if analysis_tab == 'Overview':
 
 
 elif analysis_tab == 'Analysis':
+
+    # Assuming alpha and beta are constants that you've defined or estimated
+    alpha = 0.5  # This is just a placeholder value
+    beta = 2.0   # This too is just a placeholder value
+
+    # Calculate the impact of a 1% increase in forecast accuracy on service level using the formula
+    increase_in_accuracy = 0.05
+    impact_on_service_level = beta * np.log(1 + alpha * increase_in_accuracy)
+
+    # Add this impact to the original service level to get the adjusted service level
+    original_avg_service_level = df_2023["Service_Level_TShirt"].mean()
+    adjusted_avg_service_level = original_avg_service_level + impact_on_service_level
+
+    # Displaying the impact in Streamlit
+    st.subheader("Impact of 1% Increase in Forecast Accuracy on Service Level")
+    col1, col2, col3 = st.columns(3)
+    col1.success(f"Average Service Level for 2023 : {100*original_avg_service_level:.2f}%")
+    col2.info(f"Adjusted Average Service Level for 2023 : {100*adjusted_avg_service_level:.2f}%")
+    col3.warning(f"Impact on Service Level: {100*impact_on_service_level:.2f}%")
+
+
     # 1. Histogram of Errors
     st.subheader("Histogram of Errors")
     errors = df_reel['TShirt_Sales'] - df_reel['prediction']
