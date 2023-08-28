@@ -29,7 +29,15 @@ if option == 'Global':
     col2.metric("DLT le plus long", f"{max_dlt} jours")
     col3.metric("DLT le plus court", f"{min_dlt} jours")
 
-
+    st.subheader("Temps moyen par étape en jour(s)")
+    col1, col2, col3,col4, col5, col6,col7 = st.columns(7)
+    col1.metric("Attente", "1")
+    col2.metric("Planif", f"10")
+    col3.metric("Validation", f"4")
+    col4.metric("Lancement", f"3")
+    col5.metric("Fabrication", f"4")
+    col6.metric("Vérification", f"3")
+    col7.metric("Libération", f"1")
 
     st.subheader("Courbe de densité globale des DLTs")
 
@@ -82,16 +90,6 @@ if option == 'Global':
     fig = go.Figure(data=go.Scatter(x=monthly_avg_dlt.index, y=monthly_avg_dlt.values, mode='lines+markers'))
     st.plotly_chart(fig)
 
-    # Scatter plot avec la dimension en ordonnée et le DLT moyen par CAD en abscisse
-    st.subheader("DLT Moyen par CAD par Dimension")
-    avg_dlt_by_cad = df.groupby(['Dimension', 'CAD'])['DLT'].mean().reset_index()
-    fig = go.Figure(data=go.Scatter(x=avg_dlt_by_cad['DLT'], y=avg_dlt_by_cad['Dimension'],
-                                    mode='markers', 
-                                    text=avg_dlt_by_cad['CAD'], # Afficher le CAD au survol
-                                    marker=dict(size=10, opacity=0.6, color='blue')))
-    fig.update_layout(yaxis_title="Dimension", xaxis_title="DLT Moyen", hovermode="closest")
-    st.plotly_chart(fig)
-
 
 # Si l'utilisateur choisit "Filtre"
 elif option == 'Filtre':
@@ -122,6 +120,16 @@ elif option == 'Filtre':
     col1.metric("DLT Moyen", f"{avg_dlt:.2f} jours")
     col2.metric("DLT le plus long", f"{max_dlt} jours")
     col3.metric("DLT le plus court", f"{min_dlt} jours")
+
+    st.subheader("Temps moyen par étape en jour(s)")
+    col1, col2, col3,col4, col5, col6,col7 = st.columns(7)
+    col1.metric("Attente", "1")
+    col2.metric("Planif", f"10")
+    col3.metric("Validation", f"4")
+    col4.metric("Lancement", f"3")
+    col5.metric("Fabrication", f"4")
+    col6.metric("Vérification", f"3")
+    col7.metric("Libération", f"1")
 
     # Pie Chart
     st.subheader("Répartition des DLTs")
