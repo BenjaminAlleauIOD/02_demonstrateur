@@ -34,8 +34,6 @@ st.set_page_config(layout="wide")
     
 # Load image from file
 img = Image.open("bot_iod.png")
-new_size = (150, 150)
-img = img.resize(new_size)
 st.image(img)
 st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
 st.subheader("Ioda est spécialisé dans les réglementations des contenants alimentaires")
