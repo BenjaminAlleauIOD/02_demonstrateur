@@ -34,8 +34,19 @@ st.set_page_config(layout="wide")
     
 # Load image from file
 img = Image.open("bot_iod.png")
-st.image(img)
-st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
+
+
+# Créer deux colonnes
+col1, col2 = st.columns([1, 5])  # Ajustez la largeur des colonnes si nécessaire
+# Mettre l'image dans la première colonne
+col1.image(img)  # Ajustez la largeur de l'image comme souhaité
+
+# Mettre le titre dans la deuxième colonne
+with col2:
+    st.title("Bonjour, je suis Ioda!")
+    st.title("Comment puis-je vous aider?")
+# st.image(img)
+# st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
 st.subheader("Ioda est spécialisé dans les réglementations des contenants alimentaires")
 
 
