@@ -2,6 +2,8 @@ import streamlit as st
 from openai import OpenAI
 import os
 import time
+from PIL import Image
+
 
 # Assurez-vous de définir la variable d'environnement OPENAI_API_KEY avant de lancer l'application.
 token_api = os.environ["token_api"]
@@ -21,14 +23,23 @@ def wait_on_run(run, thread, client):
 def parse_response(messages):
     """Parse la réponse brute et extrait le texte pertinent."""
     t = str(messages.data[0].content[0].text).split("value=")[1]
-    return t.replace('\\n', '\n')
+    return t.replace('\\n', '\n').replace('"','').replace('")','')
 
 # Récupération de l'ID de l'assistant stocké
 # Assurez-vous de stocker l'assistant_id dans un endroit sûr et de le charger d'une manière qui ne compromet pas la sécurité.
 assistant_id = "asst_gazNUtNLURVTvzZoSa5jtafS"
 
 # Interface Streamlit
-st.title('Assistant Réglementaire pour Contenants Alimentaires')
+st.set_page_config(layout="wide")
+    
+# Load image from file
+img = Image.open("bot_iod.png")
+new_size = (150, 150)
+img = img.resize(new_size)
+st.image(img)
+st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
+st.subheader("Ioda est spécialisé dans les réglementations des contenants alimentaires")
+
 
 user_input = st.text_input('Posez votre question ici:')
 
