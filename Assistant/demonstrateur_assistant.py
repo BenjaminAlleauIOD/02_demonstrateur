@@ -50,7 +50,7 @@ with col2:
 st.subheader("Ioda est spécialisé dans les réglementations des contenants alimentaires")
 
 img_logo = Image.open("Logo_Iod_solutions_Horizontal_Logo_Complet_Original_RVB_1186px@72ppi (1).png")
-st.sidebar.image(img_logo)
+st.sidebar.image(img_logo,width=0.7)
 password = st.sidebar.text_input("Entrez le mot de passe", type="password")
 
 if password == os.environ["pwd"]:
