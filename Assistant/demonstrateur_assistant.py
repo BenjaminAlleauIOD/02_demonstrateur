@@ -49,7 +49,10 @@ with col2:
 # st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
 st.subheader("Ioda est spécialisé dans les réglementations des contenants alimentaires")
 
+img_logo = Image.open("Logo_Iod_solutions_Horizontal_Logo_Complet_Blanc_RVB_1186px@72ppi.png")
+st.sidebar.image(img_logo)
 password = st.sidebar.text_input("Entrez le mot de passe", type="password")
+
 if password == os.environ["pwd"]:
     user_input = st.text_input('Posez votre question ici:')
 
