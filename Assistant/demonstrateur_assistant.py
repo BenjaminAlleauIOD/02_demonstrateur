@@ -49,26 +49,27 @@ with col2:
 # st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
 st.subheader("Ioda est spécialisé dans les réglementations des contenants alimentaires")
 
+password = st.sidebar.text_input("Entrez le mot de passe", type="password")
+if password == os.environ["pwd"]:
+    user_input = st.text_input('Posez votre question ici:')
 
-user_input = st.text_input('Posez votre question ici:')
+    if st.button('Envoyer'):
+        with st.spinner('Traitement en cours... Veuillez patienter.'):
+            thread = client.beta.threads.create()
+            message = client.beta.threads.messages.create(
+                thread_id=thread.id,
+                role="user",
+                content=user_input,
+            )
 
-if st.button('Envoyer'):
-    with st.spinner('Traitement en cours... Veuillez patienter.'):
-        thread = client.beta.threads.create()
-        message = client.beta.threads.messages.create(
-            thread_id=thread.id,
-            role="user",
-            content=user_input,
-        )
+            run = client.beta.threads.runs.create(
+                thread_id=thread.id,
+                assistant_id=assistant_id,
+            )
 
-        run = client.beta.threads.runs.create(
-            thread_id=thread.id,
-            assistant_id=assistant_id,
-        )
+            run = wait_on_run(run, thread, client)
 
-        run = wait_on_run(run, thread, client)
+            messages = client.beta.threads.messages.list(thread_id=thread.id)
+            parsed_response = parse_response(messages)
 
-        messages = client.beta.threads.messages.list(thread_id=thread.id)
-        parsed_response = parse_response(messages)
-
-    st.markdown(parsed_response,unsafe_allow_html=True)  # Affichage de la réponse formatée
+        st.markdown(parsed_response,unsafe_allow_html=True)  # Affichage de la réponse formatée
