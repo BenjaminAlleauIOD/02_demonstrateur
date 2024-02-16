@@ -13,7 +13,7 @@ def plot_sales():
     # Tracer la courbe des ventes
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=df_reel['Date'], y=df_reel['TShirt_Sales'],
-                             mode='lines', name='TShirt Sales'))
+                             mode='lines', name='Nb ventes'))
 
     # Ajouter la courbe des prévisions en rouge
     fig.add_trace(go.Scatter(x=df['Date'], y=df['prediction'],
@@ -22,9 +22,9 @@ def plot_sales():
 
     # Ajouter des labels et un titre
     fig.update_layout(
-        title="Sales and Forecasts for TShirt",
+        title="Suivi des ventes de Boulons",
         xaxis_title="Date",
-        yaxis_title="Sales",
+        yaxis_title="Nb ventes",
         legend_title="Type"
     )
 
@@ -79,7 +79,7 @@ def plot_mae():
 
     st.plotly_chart(fig)
 
-st.title("TShirt Sales Forecasting")
+st.title("Prévision des Ventes de Boulons")
 # Calculating KPIs
 
 # Filter for 2023 sales data
@@ -128,21 +128,21 @@ body {
 unsafe_allow_html=True)
 
 st.sidebar.markdown("IoD solutions")
-analysis_tab = st.sidebar.selectbox('Select a view', ['Overview', 'Analysis'])
+analysis_tab = st.sidebar.selectbox('Select a view', ['Global', 'Analysis'])
 
-if analysis_tab == 'Overview':
+if analysis_tab == 'Global':
     # Displaying KPIs in Streamlit
-    st.subheader("Key Performance Indicators for 2023")
+    st.subheader("Chiffres clefs pour 2023")
     col1, col2, col3, col4 = st.columns(4)
-    col1.success(f"**Sold**: {tshirts_sold_2023:,.0f}".replace(',', ' '))
-    col2.info(f"**Predicted to be Sold**: {tshirts_predicted_2023:,.0f}".replace(',', ' '))
-    col3.warning(f"**Percentage Error**: {percentage_error_2023:.2f}%")
-    col4.info(f"**Average Service Level**: {service_level_2023:,.2f}%")  # Adding the stock level KPI
+    col1.success(f"**Nombre de ventes**: {tshirts_sold_2023:,.0f}".replace(',', ' '))
+    col2.info(f"**Prédiction des ventes**: {tshirts_predicted_2023:,.0f}".replace(',', ' '))
+    col3.warning(f"**% erreur**: {percentage_error_2023:.2f}%")
+    col4.info(f"**Niveau de service moyen**: {service_level_2023:,.2f}%")  # Adding the stock level KPI
 
     plot_sales()
-    st.subheader('Stock and Service Level for TShirt')
+    st.subheader('Stock et niveau de service')
     plot_stocks_service_level() # Combined plot for stock and service level
-    st.subheader('Mean Absolute Error for Prediction')
+    st.subheader('MAE')
     plot_mae() # Plot for MAE
 
 
