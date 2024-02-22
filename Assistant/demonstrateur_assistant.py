@@ -8,7 +8,7 @@ from PIL import Image
 # Assurez-vous de définir la variable d'environnement OPENAI_API_KEY avant de lancer l'application.
 token_api = os.environ["token_api"]
 client = OpenAI(api_key=token_api)
-
+print(token_api)
 # Fonction pour attendre la fin de l'exécution
 def wait_on_run(run, thread, client):
     while run.status == "queued" or run.status == "in_progress":
