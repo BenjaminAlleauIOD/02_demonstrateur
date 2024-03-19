@@ -10,7 +10,7 @@ from sklearn.linear_model import LinearRegression
 import pickle
 from PIL import Image
 
-import seaborn as sns
+#import seaborn as sns
 import plotly.express as px
 from function_prediction import *
 # Charger les données
