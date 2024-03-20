@@ -279,5 +279,41 @@ else :
     with col2 : 
         st.plotly_chart(fig, use_container_width=True)
 
+    # Affichage 
+    # Assurez-vous d'avoir importé matplotlib.pyplot comme plt
+
+    # Calcul du pourcentage d'anomalies par usine
+    pourcentage_anomalies_par_usine = données.groupby('Localisation_Usine')['Incidents_Fabrication'].mean() * 100
+
+    # Calcul du DLT moyen par usine
+    dlt_moyen_par_usine = données.groupby('Localisation_Usine')['DLT'].mean()
+
+    # Création d'un DataFrame pour le graphique
+    data_for_plot = pd.DataFrame({
+        'Pourcentage d\'anomalies': pourcentage_anomalies_par_usine,
+        'DLT moyen': dlt_moyen_par_usine
+    }).reset_index()
+
+    # Création du graphique en utilisant Plotly Express
+    fig = px.scatter(data_for_plot, 
+                    x='Pourcentage d\'anomalies', 
+                    y='DLT moyen', 
+                    text='Localisation_Usine',
+                    size='DLT moyen', # Optionnel: ajuste la taille des points en fonction du DLT moyen
+                    hover_data=['Localisation_Usine'], # Affiche le nom de l'usine lorsque vous passez la souris sur un point
+                    title='Pourcentage d\'anomalies vs DLT moyen par usine')
+
+    fig.update_traces(textposition='top center') # Ajuste la position du texte pour la lisibilité
+    fig.update_layout(xaxis_title='Pourcentage d\'anomalies (%)',
+                    yaxis_title='DLT moyen (heures)',
+                    xaxis=dict(showgrid=True),
+                    yaxis=dict(showgrid=True))
+
+    # Afficher le graphique dans Streamlit
+    st.plotly_chart(fig)
+
+
         
+
+            
 
