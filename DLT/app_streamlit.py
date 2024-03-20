@@ -283,28 +283,28 @@ else :
     # Assurez-vous d'avoir importé matplotlib.pyplot comme plt
 
     # Calcul du pourcentage d'anomalies par usine
-    pourcentage_anomalies_par_usine = données.groupby('Localisation_Usine')['Incidents_Fabrication'].mean() * 100
+    pourcentage_anomalies_par_usine = données_last_month.groupby('Localisation_Usine')['Incidents_Fabrication'].sum()
 
     # Calcul du DLT moyen par usine
     dlt_moyen_par_usine = données.groupby('Localisation_Usine')['DLT'].mean()
 
     # Création d'un DataFrame pour le graphique
     data_for_plot = pd.DataFrame({
-        'Pourcentage d\'anomalies': pourcentage_anomalies_par_usine,
+        'Nb d\'incidents': pourcentage_anomalies_par_usine,
         'DLT moyen': dlt_moyen_par_usine
     }).reset_index()
 
     # Création du graphique en utilisant Plotly Express
     fig = px.scatter(data_for_plot, 
-                    x='Pourcentage d\'anomalies', 
+                    x='Nb d\'incidents', 
                     y='DLT moyen', 
                     text='Localisation_Usine',
                     size='DLT moyen', # Optionnel: ajuste la taille des points en fonction du DLT moyen
                     hover_data=['Localisation_Usine'], # Affiche le nom de l'usine lorsque vous passez la souris sur un point
-                    title='Pourcentage d\'anomalies vs DLT moyen par usine')
+                    title='Nb d\'incidents vs DLT moyen par usine')
 
     fig.update_traces(textposition='top center') # Ajuste la position du texte pour la lisibilité
-    fig.update_layout(xaxis_title='Pourcentage d\'anomalies (%)',
+    fig.update_layout(xaxis_title='Nb d\'incidents',
                     yaxis_title='DLT moyen (heures)',
                     xaxis=dict(showgrid=True),
                     yaxis=dict(showgrid=True))
