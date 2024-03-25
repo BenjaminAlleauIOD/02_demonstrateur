@@ -24,7 +24,7 @@ img_logo = Image.open("Logo_Iod_solutions_Horizontal_Logo_Complet_Original_RVB_1
 st.sidebar.image(img_logo)
 
 
-page = st.sidebar.radio("Naviguer", ['Suivi de la performance industrielle', 'Suivi des anomalies','Prédiction'])
+page = st.sidebar.radio("Naviguer", ['Suivi de la performance industrielle', 'Suivi des anomalies','Suivi du mois'])
 if page == 'Suivi de la performance industrielle':
     st.title('Suivi de la performance industrielle')
     # Sidebar pour les filtres
@@ -218,7 +218,7 @@ elif page=="Suivi des anomalies" :
 
 else :
     # Prédictions...
-    st.title('Prédiction et Détection d\'anomalies')
+    st.title('Détection d\'anomalies sur le mois')
     # Calcul de la conformité pour chaque jour
     id_usine_options = ['All'] + list(données['Localisation_Usine'].unique())
     id_usine = st.sidebar.selectbox('Sélectionnez une Usine:', id_usine_options)
