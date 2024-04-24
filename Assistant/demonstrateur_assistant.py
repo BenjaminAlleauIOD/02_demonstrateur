@@ -25,7 +25,7 @@ def parse_response(messages):
 
 # Récupération de l'ID de l'assistant stocké
 # Assurez-vous de stocker l'assistant_id dans un endroit sûr et de le charger d'une manière qui ne compromet pas la sécurité.
-assistant_id = "asst_DAxpejGFW4foHfu5Ab4RrxGU"
+assistant_id = "asst_m0By78Yzl4kUmGfcZumMNEKZ"
 
 # Interface Streamlit
 st.set_page_config(layout="wide")
