@@ -25,7 +25,7 @@ def parse_response(messages):
 
 # Récupération de l'ID de l'assistant stocké
 # Assurez-vous de stocker l'assistant_id dans un endroit sûr et de le charger d'une manière qui ne compromet pas la sécurité.
-assistant_id = "asst_Lyjet4ZaX8VaSmvWC8y98bZy"
+assistant_id = "asst_DAxpejGFW4foHfu5Ab4RrxGU"
 
 # Interface Streamlit
 st.set_page_config(layout="wide")
@@ -45,7 +45,7 @@ with col2:
     st.title("Comment puis-je vous aider?")
 # st.image(img)
 # st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
-st.subheader("Ioda est spécialisé dans les réglementations des contenants alimentaires")
+st.subheader("Ioda est spécialisé dans l'alimentation des ruminants")
 
 img_logo = Image.open("Logo_Iod_solutions_Horizontal_Logo_Complet_Original_RVB_1186px@72ppi (1).png")
 st.sidebar.image(img_logo)
