@@ -58,7 +58,7 @@ if password == st.secrets["pwd"]:
     if uploaded_files:
         for uploaded_file in uploaded_files:
             # Lire le contenu du fichier
-            file_content += uploaded_file.getvalue()#.decode("utf-8")  # Supposant qu'il s'agit de fichiers texte
+            file_content += uploaded_file.getvalue().decode("utf-8")  # Supposant qu'il s'agit de fichiers texte
             st.write(f"Contenu du fichier {uploaded_file.name} chargé.")
     
     user_input = st.text_input('Posez votre question ici:')
