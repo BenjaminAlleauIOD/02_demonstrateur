@@ -6,7 +6,8 @@ from PIL import Image
 
 # Assurez-vous de définir la variable d'environnement OPENAI_API_KEY avant de lancer l'application.
 token_api = st.secrets["token_api"]
-client = OpenAI(api_key = token_api)
+client = OpenAI(api_key=token_api)
+
 # Fonction pour attendre la fin de l'exécution
 def wait_on_run(run, thread, client):
     while run.status == "queued" or run.status == "in_progress":
@@ -23,8 +24,7 @@ def parse_response(messages):
     return t.replace('\\n', '\n').replace('"','').replace('")','')
 
 # Récupération de l'ID de l'assistant stocké
-# Assurez-vous de stocker l'assistant_id dans un endroit sûr et de le charger d'une manière qui ne compromet pas la sécurité.
-assistant_id = "thread_Y6kqmz3iO5vGhQxf4KQLXbvj"
+assistant_id = "asst_KgGMLas5AxxmzZEnXuneEKBs"
 
 # Interface Streamlit
 st.set_page_config(layout="wide")
@@ -41,8 +41,6 @@ col1.image(img)  # Ajustez la largeur de l'image comme souhaité
 with col2:
     st.title("Bonjour, je suis Ioda!")
     st.title("Comment puis-je vous aider?")
-# st.image(img)
-# st.title("Bonjour, je suis Ioda! comment puis-je vous aider?")
 st.subheader("Ioda est votre assistant personnalisé pour Socofer")
 
 img_logo = Image.open("Logo_Iod_solutions_Horizontal_Logo_Complet_Blanc_RVB_1186px@72ppi.png")
