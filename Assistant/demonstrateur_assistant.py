@@ -3,6 +3,9 @@ from openai import OpenAI
 import os
 import time
 from PIL import Image
+from io import BytesIO
+import docx2txt
+from PyPDF2 import PdfReader
 
 # Assurez-vous de définir la variable d'environnement OPENAI_API_KEY avant de lancer l'application.
 token_api = st.secrets["token_api"]
@@ -22,6 +25,21 @@ def parse_response(messages):
     """Parse la réponse brute et extrait le texte pertinent."""
     t = str(messages.data[0].content[0].text).split("value=")[1]
     return t.replace('\\n', '\n').replace('"','').replace('")','')
+
+def read_file_content(uploaded_file):
+    """Fonction pour lire le contenu d'un fichier (texte, pdf, docx)"""
+    if uploaded_file.type == "text/plain":
+        return uploaded_file.getvalue().decode("utf-8")
+    elif uploaded_file.type == "application/pdf":
+        pdf_reader = PdfReader(uploaded_file)
+        content = ""
+        for page in range(len(pdf_reader.pages)):
+            content += pdf_reader.pages[page].extract_text()
+        return content
+    elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        return docx2txt.process(uploaded_file)
+    else:
+        return "Format non supporté"
 
 # Récupération de l'ID de l'assistant stocké
 assistant_id = "asst_KgGMLas5AxxmzZEnXuneEKBs"
@@ -57,8 +75,9 @@ if password == st.secrets["pwd"]:
     
     if uploaded_files:
         for uploaded_file in uploaded_files:
-            # Lire le contenu du fichier
-            file_content += uploaded_file.getvalue().decode("utf-8")  # Supposant qu'il s'agit de fichiers texte
+            # Lire le contenu du fichier en fonction de son type
+            content = read_file_content(uploaded_file)
+            file_content += f"\n\n--- Contenu de {uploaded_file.name} ---\n" + content
             st.write(f"Contenu du fichier {uploaded_file.name} chargé.")
     
     user_input = st.text_input('Posez votre question ici:')
